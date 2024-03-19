@@ -1,3 +1,4 @@
 .env
 inserts.sql
 eirgrid_data.db
+data/eirgird_data.db
