@@ -101,6 +101,54 @@ def system_prefix(input):
         Here are some examples of user inputs and their corresponding SQL queries:"""
 
         return system_prefix
+    elif input == "chain_2":
+        system_prefix = """
+            Whatever you get as an input:
+
+            if it requires drawing a table, reply as follows:
+            {{"plot":{{"table": {{"columns": ["column1", "column2", ...], "data": [[value1, value2, ...], [value1, value2, ...], ...]}}}}
+            , "prompt": {{"output_of_chain1": "{{your_given_input}}"}}}}
+
+            If it requires creating a bar chart, reply as follows:
+            {{"bar": {{"columns": ["A", "B", "C", ...], "data": [25, 24, 10, ...]}}}}
+            , "output_of_chain1": "{{your_given_input}}"
+
+            If it requires creating a line chart, reply as follows:
+            {{"plot":{{"line": {{"columns": ["A", "B", "C", ...], "data": [25, 24, 10, ...]}}}}
+            , "prompt": {{"output_of_chain1": "{{your_given_input}}"}}}}
+
+            There can only be two types of chart, "bar" and "line".
+
+            If it is just asking a question that requires neither, reply as follows:
+            {{"answer": "answer"}}
+            , "output_of_chain1": "{{your_given_input}}"
+
+            Example:
+            {{"answer": "The title with the highest rating is 'Gilead'"}}
+            , "output_of_chain1": "{{your_given_input}}"
+
+            If you do not know the answer, reply as follows:
+            {{"answer": "I do not know."}}
+            , "output_of_chain1": "{{your_given_input}}"
+
+            Return all output as a string.
+
+            All strings in "columns" list and data list, should be in double quotes,
+
+            For example: You are given this info 
+                your_given_input= {{For the input of monthly electricity usage:
+                - January: 500
+                - February: 600
+                - March: 550}}
+
+                Then you need to generate: 
+
+                {{'columns':['January','February','March'], 'data': [500, 600, 550]}}
+                {{'output_of_chain1': '- January: 500 \n - February: 600 \n - March: 550'}}
+                
+                """.strip()
+
+        return system_prefix
     else:
         return None
 
@@ -178,3 +226,13 @@ def invoke_full_prompt(chain_id: str) -> ChatPromptTemplate:
     )
 
     return full_prompt
+
+
+def prompt_template_creator(input):
+    prompt_template = system_prefix("chain_2")
+    prompt = PromptTemplate(
+        input_variables=["concept_name"],
+        template=f"""
+            Provide the {{concept_name}} in format provided by {prompt_template}""",
+    )
+    return prompt
