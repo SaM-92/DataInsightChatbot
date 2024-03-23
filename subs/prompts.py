@@ -118,30 +118,42 @@ def system_prefix(input):
             Whatever you get as an input:
 
             if it requires drawing a table, reply as follows:
+           
             {{"plot":{{"table": {{"columns": ["column1", "column2", ...], "data": [[value1, value2, ...], [value1, value2, ...], ...]}}}}
             , "prompt": {{"output_of_chain1": "{{your_given_input}}"}}}}
+            
 
             If it requires creating a bar chart, reply as follows:
+            
             {{"bar": {{"columns": ["A", "B", "C", ...], "data": [25, 24, 10, ...]}}}}
             , "output_of_chain1": "{{your_given_input}}"
+            
 
             If it requires creating a line chart, reply as follows:
+            
             {{"plot":{{"line": {{"columns": ["A", "B", "C", ...], "data": [25, 24, 10, ...]}}}}
             , "prompt": {{"output_of_chain1": "{{your_given_input}}"}}}}
+            
 
             There can only be two types of chart, "bar" and "line".
 
             If it is just asking a question that requires neither, reply as follows:
-            {{"answer": "answer"}}
+            
+                {{"answer": "answer"}}
             , "output_of_chain1": "{{your_given_input}}"
+            
 
             Example:
+            
             {{"answer": "The title with the highest rating is 'Gilead'"}}
             , "output_of_chain1": "{{your_given_input}}"
+            
 
             If you do not know the answer, reply as follows:
+            
             {{"answer": "I do not know."}}
             , "output_of_chain1": "{{your_given_input}}"
+            
 
             Return all output as a string.
 
@@ -154,11 +166,12 @@ def system_prefix(input):
                 - March: 550}}
 
                 Then you need to generate: 
-
-                {{'columns':['January','February','March'], 'data': [500, 600, 550]}}
-                {{'output_of_chain1': '- January: 500 \n - February: 600 \n - March: 550'}}
                 
-                Ensure proper formatting and escape for JSON compatibility.
+                
+                    {{"bar": {{'columns':['January','February','March'], 'data': [500, 600, 550]}}}},{{'output_of_chain1': '- January: 500 - February: 600 - March: 550'}}
+                
+                
+                Your response MUST be A CORRECT JSON FORMAT
 
                 """.strip()
 
