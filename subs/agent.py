@@ -3,7 +3,7 @@ from subs.db_connections import connetc_to_irish_db
 from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
 import os
-from subs.prompts import prompt_template_creator,invoke_full_prompt(chain_id="chain_1")
+from subs.prompts import prompt_template_creator, invoke_full_prompt
 
 from langchain.chains import LLMChain, SimpleSequentialChain
 
@@ -62,7 +62,10 @@ def agent_plot_and_response(chain_id: str) -> LLMChain:
     agent = LLMChain(llm=llm, prompt=prompt)
     return agent
 
-def configure_sequential_chain(chain_id_sql: str = "chain_1", chain_id_response_plot: str = "chain_2") -> SimpleSequentialChain:
+
+def configure_sequential_chain(
+    chain_id_sql: str = "chain_1", chain_id_response_plot: str = "chain_2"
+) -> SimpleSequentialChain:
     """
     Configures and returns a sequential chain composed of an SQL agent chain and a plot-and-response agent chain.
 
@@ -77,15 +80,17 @@ def configure_sequential_chain(chain_id_sql: str = "chain_1", chain_id_response_
     """
     # Invoke the full prompt for the SQL chain using the provided SQL chain ID
     prompt_for_sql = invoke_full_prompt(chain_id=chain_id_sql)
-    
+
     # Create the SQL agent chain with the generated prompt
     chain_sql = sql_agent(prompt=prompt_for_sql)
-    
-    # Create the plot-and-response agent chain using the provided response and plot chain ID
+
+    # # Create the plot-and-response agent chain using the provided response and plot chain ID
     chain_response_plot = agent_plot_and_response(chain_id=chain_id_response_plot)
-    
-    # Combine the SQL agent chain and the plot-and-response agent chain into a sequential chain
-    chain_final = SimpleSequentialChain(chains=[chain_sql, chain_response_plot], verbose=True)
-    
+
+    # # Combine the SQL agent chain and the plot-and-response agent chain into a sequential chain
+    chain_final = SimpleSequentialChain(
+        chains=[chain_sql, chain_response_plot], verbose=True
+    )
+
     # Return the configured sequential chain
     return chain_final
