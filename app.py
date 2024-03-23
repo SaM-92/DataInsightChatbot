@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 from langchain_community.utilities import SQLDatabase
 from langchain_community.agent_toolkits import create_sql_agent
 from langchain_openai import ChatOpenAI
+from subs.db_connections import connetc_to_irish_db
 
 load_dotenv()
 OPENAI_API_KEY = os.environ["OPENAI_API_KEY"]
@@ -17,9 +18,9 @@ print("Current Working Directory: ", os.getcwd())
 
 # If needed, change it to the directory where your database file is located
 # os.chdir("./data")
-print("New Working Directory: ", os.getcwd())
+# print("New Working Directory: ", os.getcwd())
 
-db = SQLDatabase.from_uri("sqlite:///eirgrid_data.db")
+# db = SQLDatabase.from_uri("sqlite:///./data/eirgrid_data.db")
 
 # db = SQLDatabase.from_uri("sqlite:///eirgrid_data.db")
 # print(db.dialect)
@@ -42,10 +43,12 @@ query = st.text_area("Insert your query")
 
 # #llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0)
 llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0)
-db = SQLDatabase.from_uri("sqlite:///eirgrid_data.db")
-agent_executor = create_sql_agent(llm, db=db, agent_type="openai-tools", verbose=True)
-response_1 = agent_executor.invoke(query)
-st.write(response_1)
+# db = SQLDatabase.from_uri("sqlite:///./data/eirgrid_data.db")
+db = connetc_to_irish_db()
+
+# agent_executor = create_sql_agent(llm, db=db, agent_type="openai-tools", verbose=True)
+# response_1 = agent_executor.invoke(query)
+# st.write(response_1)
 
 
 # chain1=agent
