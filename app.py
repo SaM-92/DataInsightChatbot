@@ -1,13 +1,9 @@
 import streamlit as st
-from langchain.chains import LLMChain, SimpleSequentialChain
 import pandas as pd
-import sqlite3
 import os
 from dotenv import load_dotenv
-from langchain_community.utilities import SQLDatabase
-from langchain_community.agent_toolkits import create_sql_agent
-from langchain_openai import ChatOpenAI
-from subs.db_connections import connetc_to_irish_db
+from subs.agent import configure_sequential_chain
+from subs.post_processing import post_process_chain_response
 
 load_dotenv()
 OPENAI_API_KEY = os.environ["OPENAI_API_KEY"]
@@ -15,21 +11,6 @@ OPENAI_API_KEY = os.environ["OPENAI_API_KEY"]
 
 # Check current working directory.
 print("Current Working Directory: ", os.getcwd())
-
-# If needed, change it to the directory where your database file is located
-# os.chdir("./data")
-# print("New Working Directory: ", os.getcwd())
-
-# db = SQLDatabase.from_uri("sqlite:///./data/eirgrid_data.db")
-
-# db = SQLDatabase.from_uri("sqlite:///eirgrid_data.db")
-# print(db.dialect)
-# print(db.get_usable_table_names())
-# results = db.run("SELECT * FROM energy_data LIMIT 10;")
-# try:
-#     print(results)
-# except TypeError:
-#     print("The query result is not directly iterable. Check the method's return type.")
 
 
 st.title("👨‍💻 Chat with Irish Power System Data")
@@ -41,17 +22,19 @@ st.write("Please ask your question.")
 query = st.text_area("Insert your query")
 
 
-# #llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0)
-llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0)
-# db = SQLDatabase.from_uri("sqlite:///./data/eirgrid_data.db")
-db = connetc_to_irish_db()
+chain_Final = configure_sequential_chain(
+    chain_id_sql="chain_1", chain_id_response_plot="chain_2"
+)
 
-# agent_executor = create_sql_agent(llm, db=db, agent_type="openai-tools", verbose=True)
-# response_1 = agent_executor.invoke(query)
-# st.write(response_1)
+if query:
+    response_of_chain = chain_Final.run(query)
 
+    # from subs.post_processing import post_process_chain_response
 
-# chain1=agent
-# chain2 = LLMChain(llm=llm, prompt= prompt3)
+    plot_info, prompt_info = post_process_chain_response(response_of_chain)
+    print("infooo", plot_info)
+    print("info2", prompt_info)
+    st.write(prompt_info["output_of_chain1"])
+    from subs.visualisation import write_response
 
-# chain_Final = SimpleSequentialChain ( chains=[chain1, chain2] , verbose=True)
+    write_response(plot_info)

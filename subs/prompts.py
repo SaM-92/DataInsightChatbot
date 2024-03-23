@@ -68,6 +68,18 @@ def get_examples_for_chain(chain):
                 "input": "Can you provide me with the dataset for 2023?",
                 "query": "I cannot share with you this detail; you can, however, ask a specific query related to the data.",
             },
+            {
+                "input": "What was the SNSP for Northern Ireland on 2023-03-15?",
+                "query": "SELECT `SNSP` FROM energy_data WHERE `DateTime` LIKE '2023-03-15%' LIMIT 1;",
+            },
+            {
+                "input": "Show me the SNSP for the Republic of Ireland in March 2023.",
+                "query": "SELECT AVG(`SNSP`) FROM energy_data WHERE `DateTime` LIKE '2023-03-%';",
+            },
+            {
+                "input": "Compare SNSP for NI and IE in February 2023.",
+                "query": "SELECT `DateTime`, `SNSP` FROM energy_data WHERE `DateTime` LIKE '2023-02-%';",
+            },
         ]
 
         return examples
@@ -146,6 +158,8 @@ def system_prefix(input):
                 {{'columns':['January','February','March'], 'data': [500, 600, 550]}}
                 {{'output_of_chain1': '- January: 500 \n - February: 600 \n - March: 550'}}
                 
+                Ensure proper formatting and escape for JSON compatibility.
+
                 """.strip()
 
         return system_prefix
