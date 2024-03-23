@@ -14,8 +14,8 @@ def write_response(response_dict: dict):
     """
 
     # # Check if the response is an answer.
-    # if "answer" in response_dict:
-    #     st.write(response_dict["answer"])
+    if "answer" in response_dict:
+        st.write(response_dict["answer"])
 
     # Check if the response is a bar chart.
     if "bar" in response_dict:

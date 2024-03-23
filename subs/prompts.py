@@ -114,68 +114,138 @@ def system_prefix(input):
 
         return system_prefix
     elif input == "chain_2":
+        # system_prefix = """
+        #     Whatever you get as an input:
+
+        #     if it requires drawing a table, reply as follows:
+
+        #     {{"plot":{{"table": {{"columns": ["column1", "column2", ...], "data": [[value1, value2, ...], [value1, value2, ...], ...]}}}}
+        #     , "prompt": {{"output_of_chain1": "{{your_given_input}}"}}}}
+
+        #     If it requires creating a bar chart, reply as follows:
+
+        #     {{"bar": {{"columns": ["A", "B", "C", ...], "data": [25, 24, 10, ...]}}}}
+        #     , "output_of_chain1": "{{your_given_input}}"
+
+        #     If it requires creating a line chart, reply as follows:
+
+        #     {{"plot":{{"line": {{"columns": ["A", "B", "C", ...], "data": [25, 24, 10, ...]}}}}
+        #     , "prompt": {{"output_of_chain1": "{{your_given_input}}"}}}}
+
+        #     There can only be two types of chart, "bar" and "line".
+
+        #     If it is just asking a question that requires neither, reply as follows:
+
+        #         {{"answer": "answer"}}
+        #     , "output_of_chain1": "{{your_given_input}}"
+
+        #     Example:
+
+        #     {{"answer": "The title with the highest rating is 'Gilead'"}}
+        #     , "output_of_chain1": "{{your_given_input}}"
+
+        #     If you do not know the answer, reply as follows:
+
+        #     {{"answer": "I do not know."}}
+        #     , "output_of_chain1": "{{your_given_input}}"
+
+        #     Return all output as a string.
+
+        #     All strings in "columns" list and data list, should be in double quotes,
+
+        #     For example: You are given this info
+        #         your_given_input= {{For the input of monthly electricity usage:
+        #         - January: 500
+        #         - February: 600
+        #         - March: 550}}
+
+        #         Then you need to generate:
+
+        #             {{"bar": {{'columns':['January','February','March'], 'data': [500, 600, 550]}}}},{{'output_of_chain1':'For the input of monthly electricity usage:' \n '- January: 500 - February: 600 - March: 550'}}}}
+
+        #         Your response MUST be A CORRECT JSON FORMAT
+
+        #         """.strip()
+
+        # return system_prefix
+
         system_prefix = """
             Whatever you get as an input:
 
             if it requires drawing a table, reply as follows:
-           
-            {{"plot":{{"table": {{"columns": ["column1", "column2", ...], "data": [[value1, value2, ...], [value1, value2, ...], ...]}}}}
-            , "prompt": {{"output_of_chain1": "{{your_given_input}}"}}}}
-            
+            {{
+                "plot": {{
+                    "table": {{
+                        "columns": ["column1", "column2", ...],
+                        "data": [[value1, value2, ...], [value1, value2, ...], ...]
+                    }}
+                }},
+                "output_of_chain1": "{{{{your_given_input}}}}"
+            }}
 
             If it requires creating a bar chart, reply as follows:
-            
-            {{"bar": {{"columns": ["A", "B", "C", ...], "data": [25, 24, 10, ...]}}}}
-            , "output_of_chain1": "{{your_given_input}}"
-            
+            {{
+                "bar": {{
+                    "columns": ["A", "B", "C", ...],
+                    "data": [25, 24, 10, ...]
+                }},
+                "output_of_chain1": "{{{{your_given_input}}}}"
+            }}
 
             If it requires creating a line chart, reply as follows:
-            
-            {{"plot":{{"line": {{"columns": ["A", "B", "C", ...], "data": [25, 24, 10, ...]}}}}
-            , "prompt": {{"output_of_chain1": "{{your_given_input}}"}}}}
-            
+            {{
+                "plot": {{
+                    "line": {{
+                        "columns": ["A", "B", "C", ...],
+                        "data": [25, 24, 10, ...]
+                    }}
+                }},
+                "output_of_chain1": "{{{{your_given_input}}}}"
+            }}
 
             There can only be two types of chart, "bar" and "line".
 
             If it is just asking a question that requires neither, reply as follows:
-            
-                {{"answer": "answer"}}
-            , "output_of_chain1": "{{your_given_input}}"
-            
+            {{
+                "answer": "answer"
+            }},
+            "output_of_chain1": "{{{{your_given_input}}}}"
 
             Example:
-            
-            {{"answer": "The title with the highest rating is 'Gilead'"}}
-            , "output_of_chain1": "{{your_given_input}}"
-            
+            {{
+                "answer": "The title with the highest rating is 'Gilead'"
+            }},
+            "output_of_chain1": "{{{{your_given_input}}}}"
 
             If you do not know the answer, reply as follows:
-            
-            {{"answer": "I do not know."}}
-            , "output_of_chain1": "{{your_given_input}}"
-            
+            {{
+                "answer": "I do not know."
+            }},
+            "output_of_chain1": "{{{{your_given_input}}}}"
 
             Return all output as a string.
 
-            All strings in "columns" list and data list, should be in double quotes,
+            All strings in "columns" list and data list should be in double quotes.
 
-            For example: You are given this info 
-                your_given_input= {{For the input of monthly electricity usage:
-                - January: 500
-                - February: 600
-                - March: 550}}
+            For example: Given the input of monthly electricity usage:
+            - January: 500
+            - February: 600
+            - March: 550
 
-                Then you need to generate: 
-                
-                
-                    {{"bar": {{'columns':['January','February','March'], 'data': [500, 600, 550]}}}},{{'output_of_chain1': '- January: 500 - February: 600 - March: 550'}}
-                
-                
-                Your response MUST be A CORRECT JSON FORMAT
+            Then you need to generate: 
+            {{
+                "bar": {{
+                    "columns": ["January", "February", "March"],
+                    "data": [500, 600, 550]
+                }},
+                "output_of_chain1": "For the input of monthly electricity usage: - January: 500 - February: 600 - March: 550"
+            }}
 
-                """.strip()
+            Your response MUST be IN CORRECT JSON FORMAT
+            """.strip()
 
         return system_prefix
+
     else:
         return None
 
