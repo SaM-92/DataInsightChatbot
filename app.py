@@ -31,10 +31,13 @@ if query:
 
     # from subs.post_processing import post_process_chain_response
 
-    plot_info, prompt_info = post_process_chain_response(response_of_chain)
-    print("infooo", plot_info)
-    print("info2", prompt_info)
-    st.write(prompt_info["output_of_chain1"])
+    # plot_info, prompt_info = post_process_chain_response(response_of_chain)
+    # print("infooo", plot_info)
+    # print("info2", prompt_info)
+
+    response_for = post_process_chain_response(response_of_chain)
+
+    st.write(response_for["output_of_chain1"])
     from subs.visualisation import write_response
 
-    write_response(plot_info)
+    write_response(response_for)

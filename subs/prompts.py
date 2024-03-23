@@ -172,7 +172,7 @@ def system_prefix(input):
         system_prefix = """
             Whatever you get as an input:
 
-            if it requires drawing a table, reply as follows:
+            If it requires drawing a table, respond as follows:
             {{
                 "plot": {{
                     "table": {{
@@ -183,16 +183,18 @@ def system_prefix(input):
                 "output_of_chain1": "{{{{your_given_input}}}}"
             }}
 
-            If it requires creating a bar chart, reply as follows:
+            If it requires creating a bar chart, respond as follows:
             {{
-                "bar": {{
-                    "columns": ["A", "B", "C", ...],
-                    "data": [25, 24, 10, ...]
+                "plot": {{
+                    "bar": {{
+                        "columns": ["A", "B", "C", ...],
+                        "data": [25, 24, 10, ...]
+                    }}
                 }},
                 "output_of_chain1": "{{{{your_given_input}}}}"
             }}
 
-            If it requires creating a line chart, reply as follows:
+            If it requires creating a line chart, respond as follows:
             {{
                 "plot": {{
                     "line": {{
@@ -234,15 +236,17 @@ def system_prefix(input):
 
             Then you need to generate: 
             {{
-                "bar": {{
-                    "columns": ["January", "February", "March"],
-                    "data": [500, 600, 550]
+                "plot": {{
+                    "bar": {{
+                        "columns": ["January", "February", "March"],
+                        "data": [500, 600, 550]
+                    }}
                 }},
                 "output_of_chain1": "For the input of monthly electricity usage: - January: 500 - February: 600 - March: 550"
             }}
 
             Your response MUST be IN CORRECT JSON FORMAT
-            """.strip()
+        """.strip()
 
         return system_prefix
 
