@@ -4,6 +4,7 @@ import os
 from dotenv import load_dotenv
 from subs.agent import configure_sequential_chain
 from subs.post_processing import post_process_chain_response
+from subs.visualisation import write_response
 
 load_dotenv()
 OPENAI_API_KEY = os.environ["OPENAI_API_KEY"]
@@ -31,13 +32,12 @@ if query:
 
     # from subs.post_processing import post_process_chain_response
 
-    # plot_info, prompt_info = post_process_chain_response(response_of_chain)
+    plot_info, prompt_info = post_process_chain_response(response_of_chain)
     # print("infooo", plot_info)
     # print("info2", prompt_info)
 
-    response_for = post_process_chain_response(response_of_chain)
+    # response_for = post_process_chain_response(response_of_chain)
+    print(prompt_info)
+    st.write(prompt_info)
 
-    st.write(response_for["output_of_chain1"])
-    from subs.visualisation import write_response
-
-    write_response(response_for)
+    write_response(plot_info)

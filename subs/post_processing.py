@@ -7,10 +7,10 @@ def post_process_chain_response(response_of_chain):
     response_dict = json.loads(response_of_chain)
 
     # # # Access the 'plot' part of the response
-    # plot_info = response_dict["plot"]
+    plot_info = response_dict["plot"]
 
-    # # # Access the 'prompt' part of the response
-    # prompt_info = response_dict["prompt"]
+    # # Access the 'prompt' part of the response
+    prompt_info = response_dict["output_of_chain1"]
 
-    # return plot_info, prompt_info
-    return response_dict
+    return plot_info, prompt_info
+    # return response_dict
