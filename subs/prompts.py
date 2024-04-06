@@ -367,7 +367,7 @@ def invoke_full_prompt(chain_id: str) -> ChatPromptTemplate:
 
 
 def prompt_template_creator(input):
-    prompt_template = system_prefix("chain_2")
+    prompt_template = system_prefix(input)
     prompt = PromptTemplate(
         input_variables=["concept_name"],
         template=f"""

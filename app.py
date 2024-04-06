@@ -26,10 +26,6 @@ st.markdown("🔗 [LinkedIn](https://www.linkedin.com/in/saeed-misaghian/)")
 
 st.title("👨‍💻 Chat with Irish Power System Data")
 
-# st.write("Please ask your question 👇🏻")
-
-# # data = st.file_uploader("Upload a CSV")
-
 query = st.text_area("Please ask your question 👇🏻")
 
 
@@ -40,13 +36,7 @@ chain_Final = configure_sequential_chain(
 if query:
     response_of_chain = chain_Final.run(query)
 
-    # from subs.post_processing import post_process_chain_response
-
     plot_info, prompt_info = post_process_chain_response(response_of_chain)
-    # print("infooo", plot_info)
-    # print("info2", prompt_info)
-
-    # response_for = post_process_chain_response(response_of_chain)
     print(prompt_info)
     st.write(prompt_info)
 
