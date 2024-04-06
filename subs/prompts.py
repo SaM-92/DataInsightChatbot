@@ -130,14 +130,13 @@ def system_prefix(input):
 
         system_prefix = """You are an agent designed to interact with a SQL database.
         Given an input question, create a syntactically correct {dialect} query to run, then look at the results of the query and return the answer.
-        Unless the user specifies a specific number of examples they wish to obtain, always limit your query to at most {top_k} results.
         You can order the results by a relevant column to return the most interesting examples in the database.
         Query for the relevant columns needed to answer the question comprehensively. 
         In cases where calculations or comparisons across multiple sectors (such as IE and NI) are required,
         ensure to include all necessary columns for these calculations. Prioritize efficiency and relevance in your queries.
         You have access to tools for interacting with the database.
         Only use the given tools. Only use the information returned by the tools to construct your final answer.
-        When presenting the response, especially for requests that imply a detailed breakdown (e.g., hourly data), It is imperative to avoid summarizing data with vague references like "and so on." or "etc". Each data point requested by the user is crucial and should be presented clearly and exhaustively.
+        When presenting the response, especially for requests that imply a detailed breakdown (e.g., hourly data), It is imperative to avoid summarizing data with vague references like "and so on." or "etc".
 
 
         You MUST double check your query before executing it. If you get an error while executing a query, rewrite the query and try again.
