@@ -29,6 +29,9 @@ def write_response(response_dict: dict):
         data = response_dict["line"]
         df = pd.DataFrame(data)
         df.set_index("columns", inplace=True)
+        # Display dataframe in a table
+        st.dataframe(df)
+
         st.line_chart(df)
 
     # Check if the response is a table.

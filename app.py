@@ -19,12 +19,13 @@ st.set_page_config(
 )
 st.image("./images/header.png")
 st.markdown("Created by Saeed Misaghian")
+st.title("The Irish Power Data Chatbot 💬")
+
 st.markdown("📧 Contact me: [sam.misaqian@gmail.com](mailto:sam.misaqian@gmail.com)")
 st.markdown("🔗 [GitHub](https://github.com/SaM-92)")
 st.markdown("🔗 [LinkedIn](https://www.linkedin.com/in/saeed-misaghian/)")
 
 
-st.title("The Irish Power Data Chatbot")
 st.markdown(" Evolving Energies: Ten Years of Irish Power Data Unveiled (2014-2024)")
 
 query = st.text_area("Please ask your question 👇🏻")
@@ -38,7 +39,20 @@ if query:
     response_of_chain = chain_Final.run(query)
 
     plot_info, prompt_info = post_process_chain_response(response_of_chain)
-    print(prompt_info)
-    st.write(prompt_info)
+    # Check if prompt_info has a meaningful response
+    if prompt_info:
+        print(prompt_info)
+        st.write(prompt_info)
+    else:
+        # Provide a default response if prompt_info is empty or None
+        st.write(
+            "Sorry, I cannot answer the question. You may want to rephrase your query or provide more precise details."
+        )
 
-    write_response(plot_info)
+    # Only attempt to display the plot if plot_info contains data
+    if plot_info:
+        write_response(plot_info)
+    else:
+        # Optionally, handle the case where there's no plot data more explicitly
+        # This might be redundant if the message above is sufficient
+        st.write("Unable to generate plot based on the provided data.")

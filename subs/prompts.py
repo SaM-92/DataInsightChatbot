@@ -44,6 +44,23 @@ def get_examples_for_chain(chain):
                 """,
             },
             {
+                "input": "What is the amount of wind for a typical day in Ireland in 2022? I mean a wind profile in 24 hours.",
+                "query": """
+                SELECT 
+                DATE_FORMAT(`DateTime`, '%H') AS Hour, 
+                AVG(`IE Wind Generation`) AS `Average IE Wind Generation`, 
+                AVG(`NI Wind Generation`) AS `Average NI Wind Generation` 
+                FROM 
+                energy_data 
+                WHERE 
+                `DateTime` >= '2022-01-01 00:00:00' AND `DateTime` < '2023-01-01 00:00:00' 
+                GROUP BY 
+                Hour 
+                ORDER BY 
+                Hour;
+                """,
+            },
+            {
                 "input": "What is the wind curtailment for the Republic of Ireland on 2023-02-10?",
                 "query": "SELECT `IE Wind Availability` - `IE Wind Generation` AS WindCurtailment FROM energy_data WHERE `DateTime` = '2023-02-10';",
             },
@@ -120,6 +137,8 @@ def system_prefix(input):
         ensure to include all necessary columns for these calculations. Prioritize efficiency and relevance in your queries.
         You have access to tools for interacting with the database.
         Only use the given tools. Only use the information returned by the tools to construct your final answer.
+        When presenting the response, especially for requests that imply a detailed breakdown (e.g., hourly data), It is imperative to avoid summarizing data with vague references like "and so on." or "etc". Each data point requested by the user is crucial and should be presented clearly and exhaustively.
+
 
         You MUST double check your query before executing it. If you get an error while executing a query, rewrite the query and try again.
 
