@@ -170,7 +170,7 @@ def system_prefix(input):
         # return system_prefix
 
         system_prefix = """
-            Whatever you get as an input:
+            Whatever you get as an input, YOU MUST Prepare it with the following format:
 
             If it requires drawing a table, respond as follows:
             {{
@@ -229,10 +229,12 @@ def system_prefix(input):
 
             All strings in "columns" list and data list should be in double quotes.
 
-            For example: Given the input of monthly electricity usage:
-            - January: 500
-            - February: 600
-            - March: 550
+            For example: Given the input of monthly electricity usage: \n
+            "{{{{your_given_input}}}}"=
+            {{For the input of monthly electricity usage: \n
+            - January: 500 \n
+            - February: 600 \n 
+            - March: 550}}
 
             Then you need to generate: 
             {{
@@ -245,7 +247,42 @@ def system_prefix(input):
                 "output_of_chain1": "For the input of monthly electricity usage: - January: 500 - February: 600 - March: 550"
             }}
 
+            Another example: Given the input of monthly electricity usage: \n
+            "{{{{your_given_input}}}}"=
+            {{The average Irish demand per month from 2015 to 2016 is as follows: \n
+            - January 2015: 3323.09 \n
+            - February 2015: 3352.81 \n
+            - March 2015: 3184.11 \n
+            - April 2015: 2957.75\n
+            - May 2015: 2898.45\n
+            - June 2015: 2806.45\n
+            - July 2015: 2781.24\n
+            - August 2015: 2769.94\n
+            - September 2015: 2896.21\n
+            - October 2015: 3007.33\n
+            - November 2015: 3220.30\n
+            - December 2015: 3230.20\n
+            - January 2016: 3328.05\n
+            - February 2016: 3386.33\n
+            - March 2016: 3213.92\n
+            - April 2016: 3109.82\n
+            - May 2016: 2903.81 \n
+            ... (and so on for each month up to December 2016)
+            }}
+
+            Then you need to generate:
+            {{
+                "plot": {{
+                    "line": {{
+                        "columns": ["January 2015", "February 2015", "March 2015", ..., "December 2016"],
+                        "data": [3323.09, 3352.81, 3184.11, ..., last_value_for_December_2016]
+                    }}
+                }},
+                "output_of_chain1": "The average Irish demand per month from 2015 to 2016 is as follows: - January 2015: 3323.09 - February 2015: 3352.81 - March 2015: 3184.11 - April 2015: 2957.75 - May 2015: 2898.45 - June 2015: 2806.45 - July 2015: 2781.24 - August 2015: 2769.94 - September 2015: 2896.21 - October 2015: 3007.33 - November 2015: 3220.30 - December 2015: 3230.20 - January 2016: 3328.05 - February 2016: 3386.33 - March 2016: 3213.92 - April 2016: 3109.82 - May 2016: 2903.81 - ... (continue listing all months up to December 2016)"
+            }}
+
             Your response MUST be IN CORRECT JSON FORMAT
+            Your {{"output_of_chain1"}} MUST BE the FULLL RESPONSE You get as an INPUT: {{{{your_given_input}}}}
         """.strip()
 
         return system_prefix

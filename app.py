@@ -13,14 +13,24 @@ OPENAI_API_KEY = os.environ["OPENAI_API_KEY"]
 # Check current working directory.
 print("Current Working Directory: ", os.getcwd())
 
+st.set_page_config(
+    page_title="Emerald Insights",
+    page_icon="🏭",
+)
+st.image("./images/header.png")
+st.markdown("Created by Saeed Misaghian")
+st.markdown("📧 Contact me: [sam.misaqian@gmail.com](mailto:sam.misaqian@gmail.com)")
+st.markdown("🔗 [GitHub](https://github.com/SaM-92)")
+st.markdown("🔗 [LinkedIn](https://www.linkedin.com/in/saeed-misaghian/)")
+
 
 st.title("👨‍💻 Chat with Irish Power System Data")
 
-st.write("Please ask your question.")
+# st.write("Please ask your question 👇🏻")
 
 # # data = st.file_uploader("Upload a CSV")
 
-query = st.text_area("Insert your query")
+query = st.text_area("Please ask your question 👇🏻")
 
 
 chain_Final = configure_sequential_chain(
