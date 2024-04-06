@@ -24,7 +24,8 @@ st.markdown("🔗 [GitHub](https://github.com/SaM-92)")
 st.markdown("🔗 [LinkedIn](https://www.linkedin.com/in/saeed-misaghian/)")
 
 
-st.title("👨‍💻 Chat with Irish Power System Data")
+st.title("The Irish Power Data Chatbot")
+st.markdown(" Evolving Energies: Ten Years of Irish Power Data Unveiled (2014-2024)")
 
 query = st.text_area("Please ask your question 👇🏻")
 

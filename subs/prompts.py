@@ -25,6 +25,25 @@ def get_examples_for_chain(chain):
                 "query": "SELECT AVG(`NI Wind Availability`) FROM energy_data WHERE `DateTime` LIKE '2023-01%';",
             },
             {
+                "input": "Show me the electricity demand for each hour on 2022-02-02 for both IE and NI.",
+                "query": """
+                SELECT
+                DATE_FORMAT(`DateTime`, '%Y-%m-%d %H:00:00') AS Hour,
+                AVG(`IE Demand`) AS `Average IE Demand`,
+                AVG(`NI Demand`) AS `Average NI Demand`
+                FROM
+                energy_data
+                WHERE
+                `DateTime` >= '2022-02-02 00:00:00'
+                AND `DateTime` < '2022-02-03 00:00:00'
+                GROUP BY
+                Hour
+                ORDER BY
+                Hour ASC
+                LIMIT 24;
+                """,
+            },
+            {
                 "input": "What is the wind curtailment for the Republic of Ireland on 2023-02-10?",
                 "query": "SELECT `IE Wind Availability` - `IE Wind Generation` AS WindCurtailment FROM energy_data WHERE `DateTime` = '2023-02-10';",
             },
@@ -107,8 +126,6 @@ def system_prefix(input):
         DO NOT make any DML statements (INSERT, UPDATE, DELETE, DROP etc.) to the database.
 
         If the question does not seem related to the database, just return "I don't know" as the answer.
-
-        If the question seeks column names, the entire dataset, or appears designed to extract the dataset indirectly, respond with 'I cannot share these details; however, feel free to ask a specific query.
         
         Here are some examples of user inputs and their corresponding SQL queries:"""
 
