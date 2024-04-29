@@ -16,7 +16,8 @@ def init_llm() -> ChatOpenAI:
     Returns:
         ChatOpenAI: An instance of the ChatOpenAI class.
     """
-    return ChatOpenAI(model="gpt-3.5-turbo", temperature=0)
+    # return ChatOpenAI(model="gpt-3.5-turbo", temperature=0)
+    return ChatOpenAI(model="gpt-4-turbo", temperature=0)
 
 
 def sql_agent(prompt):

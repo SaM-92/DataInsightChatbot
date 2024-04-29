@@ -136,7 +136,7 @@ def system_prefix(input):
         ensure to include all necessary columns for these calculations. Prioritize efficiency and relevance in your queries.
         You have access to tools for interacting with the database.
         Only use the given tools. Only use the information returned by the tools to construct your final answer.
-        When presenting the response, especially for requests that imply a detailed breakdown (e.g., hourly data), It is imperative to avoid summarizing data with vague references like "and so on." or "etc".
+        When presenting the response, especially for requests that imply a detailed breakdown (e.g., like time/date sequence), It is imperative to avoid summarizing data with vague references like "..." or "and so on." or "etc".
 
 
         You MUST double check your query before executing it. If you get an error while executing a query, rewrite the query and try again.
@@ -315,8 +315,7 @@ def system_prefix(input):
                 }},
                 "output_of_chain1": "The average Irish demand per month from 2015 to 2016 is as follows: - January 2015: 3323.09 - February 2015: 3352.81 - March 2015: 3184.11 - April 2015: 2957.75 - May 2015: 2898.45 - June 2015: 2806.45 - July 2015: 2781.24 - August 2015: 2769.94 - September 2015: 2896.21 - October 2015: 3007.33 - November 2015: 3220.30 - December 2015: 3230.20 - January 2016: 3328.05 - February 2016: 3386.33 - March 2016: 3213.92 - April 2016: 3109.82 - May 2016: 2903.81 - ... (continue listing all months up to December 2016)"
             }}
-
-            Your response MUST be IN CORRECT JSON FORMAT
+            Avoid adding ```json to the response. Response must follow the format provided above. 
             Your {{"output_of_chain1"}} MUST BE the FULLL RESPONSE You get as an INPUT: {{{{your_given_input}}}}
         """.strip()
 

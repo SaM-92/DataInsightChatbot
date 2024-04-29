@@ -21,6 +21,7 @@ def overview_txt():
     🤖 1. Chat with Data
 
     🎙 Ask anything: Pose any query from 2014 to 2024 regarding the Irish power system, and let the bot assist you with answers and visual plots.
+    
     🧘 Be patient: As a new service in its initial test phase, and provided for free, we appreciate your patience and understanding.
 
     📊 2. Trend Analysis

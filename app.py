@@ -2,10 +2,8 @@ import streamlit as st
 import pandas as pd
 import os
 from dotenv import load_dotenv
-from subs.agent import configure_sequential_chain
-from subs.post_processing import post_process_chain_response
-from subs.visualisation import write_response
-from subs.service_overview import overview_txt
+from pages.service_overview import overview_txt
+from pages.irish_data_chatbot import irish_data_chatbot
 
 load_dotenv()
 OPENAI_API_KEY = os.environ["OPENAI_API_KEY"]
@@ -22,12 +20,9 @@ st.image("./images/header.png")
 st.markdown("Created by Saeed Misaghian")
 st.title("The Irish Power Data Chatbot 💬")
 
-st.markdown("📧 Contact me: [sa.misaqian@gmail.com](mailto:sam.misaqian@gmail.com)")
+st.markdown("📧 Contact me: [sa.misaghian@gmail.com](mailto:sam.misaqian@gmail.com)")
 st.markdown("🔗 [GitHub](https://github.com/SaM-92)")
 st.markdown("🔗 [LinkedIn](https://www.linkedin.com/in/saeed-misaghian/)")
-
-
-st.markdown(" Evolving Energies: Ten Years of Irish Power Data Unveiled (2014-2024)")
 
 
 def page0():
@@ -40,33 +35,7 @@ def page2():
 
 # Define your pages
 def page1():
-    query = st.text_area("Please ask your question 👇🏻")
-
-    chain_Final = configure_sequential_chain(
-        chain_id_sql="chain_1", chain_id_response_plot="chain_2"
-    )
-
-    if query:
-        response_of_chain = chain_Final.run(query)
-
-        plot_info, prompt_info = post_process_chain_response(response_of_chain)
-        # Check if prompt_info has a meaningful response
-        if prompt_info:
-            print(prompt_info)
-            st.write(prompt_info)
-        else:
-            # Provide a default response if prompt_info is empty or None
-            st.write(
-                "Sorry, I cannot answer the question. You may want to rephrase your query or provide more precise details."
-            )
-
-        # Only attempt to display the plot if plot_info contains data
-        if plot_info:
-            write_response(plot_info)
-        else:
-            # Optionally, handle the case where there's no plot data more explicitly
-            # This might be redundant if the message above is sufficient
-            st.write("Unable to generate plot based on the provided data.")
+    irish_data_chatbot()
 
 
 # Sidebar navigation

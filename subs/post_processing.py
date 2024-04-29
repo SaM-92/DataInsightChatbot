@@ -25,6 +25,8 @@ def post_process_chain_response(response_of_chain):
     if "output_of_chain1" in response_3:
         if response_3["output_of_chain1"] == "I do not know.":
             prompt_info = "Sorry, I cannot answer the question. You may want to rephrase your query or provide more precise details."
+        else:
+            prompt_info = response_3["output_of_chain1"]
     else:
         # Handle the case where 'output_of_chain1' is not in the response
         print("Warning: 'output_of_chain1' key not found in response.")
