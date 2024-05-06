@@ -145,6 +145,13 @@ def system_prefix(input):
 
         If the question does not seem related to the database, just return "I don't know" as the answer.
         
+        Follow these guidelines when processing user queries:
+        1. **Default Granularity**: By default, consider hourly granularity. 
+        2. **Monthly Aggregation**: If a user asks for data within a specific year (e.g., "2023"), aggregate by monthly averages.
+        3. **Yearly Aggregation**: If a user asks for multiple years, aggregate by yearly averages.
+        4. **Region Defaults**: Unless explicitly stated, assume queries pertain to the Republic of Ireland. If Northern Ireland is requested explicitly, include it in the query.
+
+
         Here are some examples of user inputs and their corresponding SQL queries:"""
 
         return system_prefix
