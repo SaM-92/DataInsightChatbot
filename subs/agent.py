@@ -124,12 +124,13 @@ def agent_plot_and_response_v2(user_query: str, plot_data: str) -> LLMChain:
         content=(
             "You are an expert in generating Python plotting scripts using matplotlib. "
             "You'll receive a user query and a dataset. Understand the user query to detect the preferred chart type. "
-            "Please handle any `None` values by replacing them with zero before plotting."
-            "If the query mentions 'bar chart' or 'line chart', use that type. Otherwise, default to a bar chart. "
-            "In bar chart, if multiple data series exist, group the bars for each category to represent the different series side by side. "
+            "Always define all required parameters explicitly, including `bar_width` and index ranges. "
+            "Handle any missing parameters by providing default values where appropriate, like setting `bar_width` to 0.35. "
+            "In bar charts, group multiple data series side by side for each category. "
+            "Ensure the script includes all required parameters for axis labels, titles, and legends."
             "Generate a Python script that uses matplotlib to visualize the data with appropriate axis labels, title, and legend."
             "The output must contain only the Python code itself to be used in executable with no changes. "
-            "Do not include markdown code fences, additional comments, text, or use the `\\n` character explicitly to separate lines."
+            "Do not include markdown code fences, additional comments, or text."
         )
     )
 
