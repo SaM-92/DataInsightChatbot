@@ -66,7 +66,7 @@ def agent_plot_and_response(chain_id: str) -> LLMChain:
 
 def configure_sequential_chain(
     chain_id_sql: str = "chain_1",
-    chain_id_response_plot: str = "chain_2",
+    # chain_id_response_plot: str = "chain_2",
     chain_id_response_python: str = "chain_python_coder",
 ) -> SimpleSequentialChain:
     """
