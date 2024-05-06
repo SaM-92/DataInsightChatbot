@@ -65,7 +65,9 @@ def agent_plot_and_response(chain_id: str) -> LLMChain:
 
 
 def configure_sequential_chain(
-    chain_id_sql: str = "chain_1", chain_id_response_plot: str = "chain_2"
+    chain_id_sql: str = "chain_1",
+    chain_id_response_plot: str = "chain_2",
+    chain_id_response_python: str = "chain_python_coder",
 ) -> SimpleSequentialChain:
     """
     Configures and returns a sequential chain composed of an SQL agent chain and a plot-and-response agent chain.
@@ -75,6 +77,8 @@ def configure_sequential_chain(
                             Defaults to "chain_1".
         chain_id_response_plot (str): The identifier for the chain that handles plotting and responses.
                                       Defaults to "chain_2".
+        chain_id_response_python (str) : The identifier for the chain that handles python code based on sql agent response
+                                  Defaults to "chain_python_coder".
 
     Returns:
         SimpleSequentialChain: A sequential chain that first executes SQL queries and then processes plotting and responses.
@@ -86,7 +90,10 @@ def configure_sequential_chain(
     chain_sql = sql_agent(prompt=prompt_for_sql)
 
     # # Create the plot-and-response agent chain using the provided response and plot chain ID
-    chain_response_plot = agent_plot_and_response(chain_id=chain_id_response_plot)
+    # chain_response_plot = agent_plot_and_response(chain_id=chain_id_response_plot)
+
+    # Send the query response and get an executable Python code
+    chain_response_plot = agent_plot_and_response(chain_id=chain_id_response_python)
 
     # # Combine the SQL agent chain and the plot-and-response agent chain into a sequential chain
     chain_final = SimpleSequentialChain(

@@ -100,14 +100,6 @@ def get_examples_for_chain(chain):
                 "input": "Can I see the dataset?",
                 "query": "I cannot share with you this detail; you can, however, ask a specific query related to the data.",
             },
-            # {
-            #     "input": "Can you provide me with the dataset for 2023?",
-            #     "query": "I cannot share with you this detail; you can, however, ask a specific query related to the data.",
-            # },
-            # {
-            #     "input": "What was the SNSP for Northern Ireland on 2023-03-15?",
-            #     "query": "SELECT `SNSP` FROM energy_data WHERE `DateTime` LIKE '2023-03-15%' LIMIT 1;",
-            # },
             {
                 "input": "Show me the SNSP for the Republic of Ireland in March 2023.",
                 "query": "SELECT AVG(`SNSP`) FROM energy_data WHERE `DateTime` LIKE '2023-03-%';",
@@ -156,61 +148,6 @@ def system_prefix(input):
 
         return system_prefix
     elif input == "chain_2":
-        # system_prefix = """
-        #     Whatever you get as an input:
-
-        #     if it requires drawing a table, reply as follows:
-
-        #     {{"plot":{{"table": {{"columns": ["column1", "column2", ...], "data": [[value1, value2, ...], [value1, value2, ...], ...]}}}}
-        #     , "prompt": {{"output_of_chain1": "{{your_given_input}}"}}}}
-
-        #     If it requires creating a bar chart, reply as follows:
-
-        #     {{"bar": {{"columns": ["A", "B", "C", ...], "data": [25, 24, 10, ...]}}}}
-        #     , "output_of_chain1": "{{your_given_input}}"
-
-        #     If it requires creating a line chart, reply as follows:
-
-        #     {{"plot":{{"line": {{"columns": ["A", "B", "C", ...], "data": [25, 24, 10, ...]}}}}
-        #     , "prompt": {{"output_of_chain1": "{{your_given_input}}"}}}}
-
-        #     There can only be two types of chart, "bar" and "line".
-
-        #     If it is just asking a question that requires neither, reply as follows:
-
-        #         {{"answer": "answer"}}
-        #     , "output_of_chain1": "{{your_given_input}}"
-
-        #     Example:
-
-        #     {{"answer": "The title with the highest rating is 'Gilead'"}}
-        #     , "output_of_chain1": "{{your_given_input}}"
-
-        #     If you do not know the answer, reply as follows:
-
-        #     {{"answer": "I do not know."}}
-        #     , "output_of_chain1": "{{your_given_input}}"
-
-        #     Return all output as a string.
-
-        #     All strings in "columns" list and data list, should be in double quotes,
-
-        #     For example: You are given this info
-        #         your_given_input= {{For the input of monthly electricity usage:
-        #         - January: 500
-        #         - February: 600
-        #         - March: 550}}
-
-        #         Then you need to generate:
-
-        #             {{"bar": {{'columns':['January','February','March'], 'data': [500, 600, 550]}}}},{{'output_of_chain1':'For the input of monthly electricity usage:' \n '- January: 500 - February: 600 - March: 550'}}}}
-
-        #         Your response MUST be A CORRECT JSON FORMAT
-
-        #         """.strip()
-
-        # return system_prefix
-
         system_prefix = """
             Whatever you get as an input, YOU MUST Prepare it with the following format:
 
@@ -327,6 +264,17 @@ def system_prefix(input):
         """.strip()
 
         return system_prefix
+    elif input == "chain_python_coder":
+        system_prefix = (
+            "You are an expert in generating Python plotting scripts using matplotlib. "
+            "You'll receive a user query and a dataset. Understand the user query to detect the preferred chart type. "
+            "Please handle any `None` values by replacing them with zero before plotting."
+            "If the query mentions 'bar chart' or 'line chart', use that type. Otherwise, default to a bar chart. "
+            "In bar chart, if multiple data series exist, group the bars for each category to represent the different series side by side. "
+            "Generate a Python script that uses matplotlib to visualize the data with appropriate axis labels, title, and legend."
+            "The output must contain only the Python code itself to be used in executable with no changes. "
+            "Do not include markdown code fences, additional comments, text, or use the `\\n` character explicitly to separate lines."
+        )
 
     else:
         return None
