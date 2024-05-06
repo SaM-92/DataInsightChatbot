@@ -23,16 +23,17 @@ def irish_data_chatbot():
 
     # Only process the query after the user presses the 'Submit' button and ensures query is not empty
     if st.session_state["button_pressed"] and query:
-        chain_Final = configure_sequential_chain(
-            chain_id_sql="chain_1", chain_id_response_plot="chain_2"
-        )
+        with st.spinner("Processing your request... Please wait."):
+            chain_Final = configure_sequential_chain(
+                chain_id_sql="chain_1", chain_id_response_plot="chain_2"
+            )
 
-        response_of_chain = chain_Final.run(query)
+            response_of_chain = chain_Final.run(query)
 
-        plot_info, prompt_info = post_process_chain_response(response_of_chain)
+            plot_info, prompt_info = post_process_chain_response(response_of_chain)
 
-        # Reset button press state after processing
-        st.session_state["button_pressed"] = False
+            # Reset button press state after processing
+            st.session_state["button_pressed"] = False
 
         # Display responses or errors based on the processing results
         if prompt_info:
