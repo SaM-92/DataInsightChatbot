@@ -1,0 +1,19 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Streamlit",
+            "type": "python",
+            "request": "launch",
+            "module": "streamlit.cli",
+            "args": [
+                "run",
+                "${workspaceFolder}/app.py",  // Ensure the path to your Streamlit app file is correct
+                "--server.port",
+                "8501" // You can change this to another port if needed
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        }
+    ]
+}

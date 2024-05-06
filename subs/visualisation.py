@@ -28,9 +28,19 @@ def write_response(response_dict: dict):
     if "line" in response_dict:
         data = response_dict["line"]
         df = pd.DataFrame(data)
-        df.set_index("columns", inplace=True)
+        # df.set_index("columns", inplace=True)
+        # Convert the 'columns' to an ordered Categorical type based on the existing order
+        df.set_index(
+            pd.CategoricalIndex(df["columns"], categories=df["columns"], ordered=True),
+            inplace=True,
+        )
+
         # Display dataframe in a table
         st.dataframe(df)
+
+        df.drop(
+            "columns", axis=1, inplace=True
+        )  # Remove the columns column if it's no longer needed as a separate column
 
         st.line_chart(df)
 
