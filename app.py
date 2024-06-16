@@ -7,13 +7,11 @@ from dotenv import load_dotenv
 
 from pages.service_overview import overview_txt
 from pages.irish_data_chatbot import irish_data_chatbot
+from subs.styles import get_no_sidebar_style
 
 load_dotenv()
 OPENAI_API_KEY = os.environ["OPENAI_API_KEY"]
 
-
-# Check current working directory.
-# print("Current Working Directory: ", os.getcwd())
 
 st.set_page_config(
     page_title="Emerald Insights",
@@ -54,11 +52,6 @@ if page == "🇮🇪Irish Data Chatbot☘️":
 elif page == "✨Service Overview✨":
     page0()
 
-
-no_sidebar_style = """
-    <style>
-        div[data-testid="stSidebarNav"] {display: none;}
-    </style>
-"""
-# Get rid of unwanted sidebar texts
+# Apply the no sidebar style
+no_sidebar_style = get_no_sidebar_style()
 st.markdown(no_sidebar_style, unsafe_allow_html=True)

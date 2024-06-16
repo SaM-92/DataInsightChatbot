@@ -10,7 +10,8 @@ import streamlit as st
 def irish_data_chatbot():
     # This will create a text area for user input and store it in 'query'
     query = st.text_area(
-        "Please ask your question 👇🏻"
+        "Please ask your question 👇🏻",
+        placeholder="Example: What is the average wind generation in Ireland in 2023, averaged by month?",
     ).strip()  # .strip() removes any leading/trailing whitespace
 
     # Initialize or update the session state for handling button press
@@ -35,7 +36,7 @@ def irish_data_chatbot():
         #     # Reset button press state after processing
         #     st.session_state["button_pressed"] = False
 
-        with st.spinner("Processing your request... Please wait."):
+        with st.spinner("🚀 Processing your request... Please wait ⏳"):
             # Example of using the function
             chain_id_sql = "chain_1"
             chain_id_response_plot = "chain_2"
