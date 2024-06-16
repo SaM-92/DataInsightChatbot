@@ -1,0 +1,15 @@
+LOAD DATABASE
+     FROM sqlite:///./data/eirgrid_data.db
+     INTO postgresql://u7eqsbngbjfh7m:pb374b75cd5ec8f1f7ff711a5b2b62f218681127f0dfafbbecb1a33e8f7373258@c7u1tn6bvvsodf.cluster-czz5s0kz4scl.eu-west-1.rds.amazonaws.com:5432/d12vlh6tsudfaj
+
+WITH
+     include drop, create tables, no truncate,
+     preserve index names, reset sequences, batch rows = 10000
+
+SET work_mem to '16MB', maintenance_work_mem to '512MB'
+
+CAST type string to text drop typemod,
+     type datetime to timestamptz,
+     type boolean using intcast
+
+ALTER SCHEMA "main" RENAME TO "public";
