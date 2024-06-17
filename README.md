@@ -1,5 +1,15 @@
 # Emerald Insights: SQL Query and Data Analysis Chatbot 💬
 
+## Technologies Used
+
+![LangChain](https://img.shields.io/badge/LangChain-%2300A9C0.svg?style=for-the-badge&logo=langchain&logoColor=white)
+![OpenAI](https://img.shields.io/badge/OpenAI-%2300A9C0.svg?style=for-the-badge&logo=openai&logoColor=white)
+![Python](https://img.shields.io/badge/Python-%233776AB.svg?style=for-the-badge&logo=python&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-%234169E1.svg?style=for-the-badge&logo=postgresql&logoColor=white)
+![SQLite](https://img.shields.io/badge/SQLite-%2307406E.svg?style=for-the-badge&logo=sqlite&logoColor=white)
+![Streamlit](https://img.shields.io/badge/Streamlit-%230E4A7E.svg?style=for-the-badge&logo=streamlit&logoColor=white)
+![Heroku](https://img.shields.io/badge/Heroku-430098?style=for-the-badge&logo=heroku&logoColor=white)
+
 ## Overview
 
 ![Real-time Data Scraping Diagram](/images/overview.gif)
