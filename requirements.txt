@@ -8,3 +8,5 @@ pandas
 streamlit
 python-dotenv
 faiss-cpu
+sqlalchemy
+matplotlib

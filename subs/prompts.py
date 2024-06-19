@@ -142,7 +142,11 @@ def system_prefix(input):
         2. **Monthly Aggregation**: If a user asks for data within a specific year (e.g., "2023"), aggregate by monthly averages.
         3. **Yearly Aggregation**: If a user asks for multiple years, aggregate by yearly averages.
         4. **Region Defaults**: Unless explicitly stated, assume queries pertain to the Republic of Ireland. If Northern Ireland is requested explicitly, include it in the query.
-
+ 
+        Use the following PostgreSQL-specific SQL functions for date and time operations:
+        - Use DATE_TRUNC('month', "DateTime"::timestamp) for truncating dates to the month.
+        - Use TO_CHAR("DateTime"::timestamp, 'YYYY-MM') for formatting dates.
+        - Use EXTRACT(MONTH FROM "DateTime"::timestamp) for extracting the month.
 
         Here are some examples of user inputs and their corresponding SQL queries:"""
 

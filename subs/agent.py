@@ -1,5 +1,5 @@
 from langchain_community.agent_toolkits import create_sql_agent
-from subs.db_connections import connetc_to_irish_db
+from subs.db_connections import connect_to_irish_db
 from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
 import os
@@ -7,6 +7,7 @@ from subs.prompts import prompt_template_creator, invoke_full_prompt
 
 from langchain.chains import LLMChain, SimpleSequentialChain
 from langchain.schema import SystemMessage, HumanMessage
+import streamlit as st
 
 
 # Function to initialize the ChatOpenAI model
@@ -37,7 +38,7 @@ def sql_agent(prompt):
 
     # Initialize the language model and database connection
     llm = init_llm()
-    db = connetc_to_irish_db()
+    db = connect_to_irish_db(cloud=True)
 
     agent = create_sql_agent(
         llm=llm,
@@ -174,6 +175,7 @@ def generate_sql_and_plot(
     # Step 2: Execute the SQL chain with the provided user query
     sql_output = chain_sql.run(user_query)
 
+    st.write("✅ We got the results, now we are preparing the figure for you!")
     # Step 3: Create the response and plot agent chain using the SQL output and user query
     plot_output = agent_plot_and_response_v2(
         user_query=user_query, plot_data=sql_output

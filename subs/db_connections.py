@@ -1,15 +1,35 @@
 from langchain_community.utilities import SQLDatabase
+from sqlalchemy import create_engine
+import os
+import streamlit as st
 
 
-def connetc_to_irish_db():
+def connect_to_irish_db(cloud=True):
     """Connect to the SQLite database holding Irish power system data.
+
+    Args:
+        cloud (bool, optional): True if we are running the code on the cloud. Defaults to True.
 
     Returns:
         SQLDatabase: An instance of the SQLDatabase class connected to the Irish power system data.
     """
-    # import os
 
-    # print("Current Working Directory:", os.getcwd())
+    # Get the DATABASE_URL from environment variable or use the Heroku PostgreSQL URL directly
+    if cloud == True:
+        DATABASE_URL = os.environ["DATABASE_URL"]
 
-    db = SQLDatabase.from_uri("sqlite:///./data/eirgrid_data.db")
-    return db
+        if not DATABASE_URL:
+            raise ValueError("No DATABASE_URL environment variable set")
+
+        # Create an SQLAlchemy engine
+        engine = create_engine(DATABASE_URL)
+
+        # Create a LangChain SQLDatabase instance using the SQLAlchemy engine
+        db = SQLDatabase(engine)
+        print("Successfully connected to the PostgreSQL")
+        st.write("🫡 We are fetching data for you!")
+        return db
+
+    else:
+        db = SQLDatabase.from_uri("sqlite:///./data/eirgrid_data.db")
+        return db
