@@ -367,3 +367,29 @@ def prompt_template_creator(input):
             Provide the {{concept_name}} in format provided by {prompt_template}""",
     )
     return prompt
+
+
+def python_plotter_prompt_sys():
+    text = (
+        "You are an expert in generating Python plotting scripts using matplotlib. "
+        "You'll receive a user query and a dataset. Understand the user query to detect the preferred chart type. "
+        "Always define all required parameters explicitly, including `bar_width` and index ranges. "
+        "Handle any missing parameters by providing default values where appropriate, like setting `bar_width` to 0.35. "
+        "In bar charts, group multiple data series side by side for each category. "
+        "Ensure the script includes all required parameters for axis labels, titles, and legends."
+        "Generate a Python script that uses matplotlib to visualize the data with appropriate axis labels, title, and legend."
+        "The output must contain only the Python code itself to be used in executable with no changes. "
+        "Do not include markdown code fences, additional comments, or text."
+    )
+
+    return text
+
+
+def python_plotter_prompt_user(user_query, plot_data):
+
+    return (
+        f'Given the user query: "{user_query}" and the following dataset:\n\n'
+        f"{plot_data}\n\n"
+        "Create a Python script to visualize this data with matplotlib. Make sure to detect the correct chart type and apply "
+        "appropriate axis labels, a title, and a legend."
+    )

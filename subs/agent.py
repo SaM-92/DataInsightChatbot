@@ -3,7 +3,12 @@ from subs.db_connections import connect_to_irish_db
 from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
 import os
-from subs.prompts import prompt_template_creator, invoke_full_prompt
+from subs.prompts import (
+    prompt_template_creator,
+    invoke_full_prompt,
+    python_plotter_prompt_sys,
+    python_plotter_prompt_user,
+)
 
 from langchain.chains import LLMChain, SimpleSequentialChain
 from langchain.schema import SystemMessage, HumanMessage
@@ -121,27 +126,10 @@ def agent_plot_and_response_v2(user_query: str, plot_data: str) -> LLMChain:
     llm = init_llm()
 
     # Define the system message content
-    system_message = SystemMessage(
-        content=(
-            "You are an expert in generating Python plotting scripts using matplotlib. "
-            "You'll receive a user query and a dataset. Understand the user query to detect the preferred chart type. "
-            "Always define all required parameters explicitly, including `bar_width` and index ranges. "
-            "Handle any missing parameters by providing default values where appropriate, like setting `bar_width` to 0.35. "
-            "In bar charts, group multiple data series side by side for each category. "
-            "Ensure the script includes all required parameters for axis labels, titles, and legends."
-            "Generate a Python script that uses matplotlib to visualize the data with appropriate axis labels, title, and legend."
-            "The output must contain only the Python code itself to be used in executable with no changes. "
-            "Do not include markdown code fences, additional comments, or text."
-        )
-    )
+    system_message = SystemMessage(content=python_plotter_prompt_sys())
 
     # Create the user prompt
-    user_prompt = (
-        f'Given the user query: "{user_query}" and the following dataset:\n\n'
-        f"{plot_data}\n\n"
-        "Create a Python script to visualize this data with matplotlib. Make sure to detect the correct chart type and apply "
-        "appropriate axis labels, a title, and a legend."
-    )
+    user_prompt = python_plotter_prompt_user(user_query=user_query, plot_data=plot_data)
 
     # Create a message list to pass to the LLM
     messages = [system_message, HumanMessage(content=user_prompt)]
@@ -176,6 +164,7 @@ def generate_sql_and_plot(
     sql_output = chain_sql.run(user_query)
 
     st.write("✅ We got the results, now we are preparing the figure for you!")
+
     # Step 3: Create the response and plot agent chain using the SQL output and user query
     plot_output = agent_plot_and_response_v2(
         user_query=user_query, plot_data=sql_output
