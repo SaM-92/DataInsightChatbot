@@ -18,6 +18,14 @@ It features a SQL agent that interprets user queries to generate precise SQL sta
 
 ![Real-time Data Scraping Diagram](/images/overview.gif)
 
+## Access the App
+
+You can access the Chatbot by clicking the link below:
+
+🔗 [SQL Query and Data Analysis Chatbot 💬](https://ireland-res-chartbot-ef36aa25eef0.herokuapp.com)
+
+Explore the features and see how large language models can simplify data queries related to renewable energy sources in Ireland.
+
 ## Key Technologies and Techniques:
 
 - LangChain: Orchestrates the chatbot workflow, integrating SQL and Python agents for seamless data interaction and processing.
