@@ -125,7 +125,13 @@ emerald-insights/
 
 ### Data
 
-The data is hosted on a PostgreSQL database. Ensure your PostgreSQL instance is running and accessible.
+The data is hosted on a PostgreSQL database.
+
+For running the code locally, you can use the SQL database stored in the `data` folder under the name `eirgrid_data.db`. You also need to set `connect_to_irish_db(cloud=True)` to `connect_to_irish_db(cloud=False)` in the code.
+
+### Contributing
+
+Contributions are welcome! Please ensure your pull requests are well-documented and tested. Adherence to coding standards, including the use of docstrings and comments, is encouraged.
 
 ## Contact
 
