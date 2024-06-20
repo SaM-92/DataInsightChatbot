@@ -1,6 +1,6 @@
-from subs.agent import generate_sql_and_plot
-
 import streamlit as st
+
+from subs.agent import generate_sql_and_plot
 
 
 def irish_data_chatbot():

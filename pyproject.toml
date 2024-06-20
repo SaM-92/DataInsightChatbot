@@ -1,2 +1,15 @@
 [tool.ruff]
-line-length = 120
+line-length = 120  # defaults to 88 like black
+target-version = "py39"  # the python version to target, useful when considering code upgrades, defaults to "py310"
+
+lint.select = [
+  "E",   # pycodestyle
+  "F",   # pyflakes
+  "UP",  # pyupgrade,
+  "I",   # isort
+]
+
+# if you want to configure a particular plugin, you can do it in 
+# a subsection, it is usually the same configuration that the plugin
+# supports
+[tool.ruff.lint.isort]

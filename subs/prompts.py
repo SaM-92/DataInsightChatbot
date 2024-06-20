@@ -1,3 +1,5 @@
+from langchain_community.vectorstores import FAISS
+from langchain_core.example_selectors import SemanticSimilarityExampleSelector
 from langchain_core.prompts import (
     ChatPromptTemplate,
     FewShotPromptTemplate,
@@ -6,9 +8,6 @@ from langchain_core.prompts import (
     SystemMessagePromptTemplate,
 )
 from langchain_openai import OpenAIEmbeddings
-from langchain_core.example_selectors import SemanticSimilarityExampleSelector
-from langchain_community.vectorstores import FAISS
-from typing import List
 
 
 def get_examples_for_chain(chain):

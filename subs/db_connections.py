@@ -15,7 +15,7 @@ def connect_to_irish_db(cloud=True):
     """
 
     # Get the DATABASE_URL from environment variable or use the Heroku PostgreSQL URL directly
-    if cloud == True:
+    if cloud is True:
         DATABASE_URL = os.environ["DATABASE_URL"]
 
         if not DATABASE_URL:
