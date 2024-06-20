@@ -18,6 +18,9 @@ def connect_to_irish_db(cloud=True):
     if cloud is True:
         DATABASE_URL_C = os.environ["DATABASE_URL"]
 
+        if DATABASE_URL_C.startswith("postgres://"):
+            DATABASE_URL_C = DATABASE_URL_C.replace("postgres://", "postgresql://", 1)
+
         if not DATABASE_URL_C:
             raise ValueError("No DATABASE_URL environment variable set")
 
