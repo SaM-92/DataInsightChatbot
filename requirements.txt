@@ -10,3 +10,4 @@ python-dotenv
 faiss-cpu
 sqlalchemy
 matplotlib
+psycopg2-binary
