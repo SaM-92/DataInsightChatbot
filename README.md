@@ -36,12 +36,6 @@ It features a SQL agent that interprets user queries to generate precise SQL sta
 
 - Semantic Similarity Example Selector: Matches user queries with relevant examples to improve response accuracy.
 
-## Example Code Insights:
-
-- Database Connection: Connects to an SQLite database containing system data using the SQLDatabase utility.
-- Sequential Chains: Combines SQL query execution and Python data processing for end-to-end data retrieval and visualization.
-- Post-Processing: Formats responses from the language model for presentation in the Streamlit interface.
-
 ## Setup
 
 ### Prerequisites
