@@ -12,9 +12,11 @@
 
 ## Overview
 
-![Real-time Data Scraping Diagram](/images/overview.gif)
+Emerald Insights is a chatbot application engineered to provide detailed insights and visualisations based on user queries regarding specific datasets, such as the Irish historical electricity dataset. This application leverages cutting-edge technologies to deliver accurate and comprehensive data analysis. It uses Streamlit for the front-end and integrates advanced backend technologies such as LangChain, OpenAI, SQL, and Python agents for data processing and retrieval.
 
-Emerald Insights is a chatbot application providing insights and visualizations about the Irish power system from 2014 to 2024. It uses Streamlit for the front-end and integrates advanced backend technologies such as LangChain, OpenAI, SQL, and Python agents for data processing and retrieval.
+It features a SQL agent that interprets user queries to generate precise SQL statements, and a Python agent that translates SQL output into visualisation code, providing clear and informative graphical representations of the data. The application utilises natural language processing (NLP) to transform user queries into executable SQL and Python code, ensuring a seamless and intuitive user experience in data analysis and visualisation.
+
+![Real-time Data Scraping Diagram](/images/overview.gif)
 
 ## Key Technologies and Techniques:
 
