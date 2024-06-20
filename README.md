@@ -137,6 +137,10 @@ For running the code locally, you can use the SQL database stored in the `data` 
 
 Contributions are welcome! Please ensure your pull requests are well-documented and tested. Adherence to coding standards, including the use of docstrings and comments, is encouraged.
 
+## License
+
+This project is licensed under the GNU GENERAL PUBLIC LICENSE - see the [LICENSE](licence) file for details.
+
 ## Contact
 
 Created by Saeed Misaghian
