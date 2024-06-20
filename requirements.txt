@@ -1,5 +1,5 @@
 SQLAlchemy
-psycopg2
+psycopg2-binary
 langchain
 langchain-community
 langchain-openai
@@ -8,6 +8,4 @@ pandas
 streamlit
 python-dotenv
 faiss-cpu
-sqlalchemy
 matplotlib
-psycopg2-binary
