@@ -44,22 +44,21 @@ Emerald Insights is a chatbot application providing insights and visualizations 
 
 ### Prerequisites
 
-- See `requirements.txt` file
+- See `requirements.txt`
 
 ### Installation
 
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/SaM-92/emerald-insights.git
-   cd emerald-insights
+   git clone https://github.com/SaM-92/ireland_res_chatbot
    ```
 
-2. Create and activate a virtual environment:
+2. Create and activate a conda environment:
 
    ```bash
-   python -m venv env
-   source env/bin/activate  # On Windows, use `env\Scripts\activate`
+    conda create -n sql_agent_dev python=3.10
+    conda activate sql_agent_dev
    ```
 
 3. Install the required packages:
@@ -121,7 +120,12 @@ emerald-insights/
   Contains the chatbot functionality to handle user queries about the Irish power system.
 
 - `subs/`
-  This directory contains various modules to support the application: - `agent.py`: Handles AI agents. - `db_connections.py`: Handles database connections. - `prompts.py`: Contains the templates and logic for generating prompts. - `styles.py`: Provides styles for the Streamlit application. - `visualisations.py`: Functions to visualize data in response to user queries.
+  This directory contains various modules to support the application:
+  - `agent.py`: Handles AI agents.
+  - `db_connections.py`: Handles database connections.
+  - `prompts.py`: Contains the templates and logic for generating prompts.
+  - `styles.py`: Provides styles for the Streamlit application.
+  - `visualisations.py`: Functions to visualize data in response to user queries.
 
 ### Data
 
