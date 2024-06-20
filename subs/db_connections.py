@@ -16,16 +16,16 @@ def connect_to_irish_db(cloud=True):
 
     # Get the DATABASE_URL from environment variable or use the Heroku PostgreSQL URL directly
     if cloud is True:
-        DATABASE_URL_C = os.environ["DATABASE_URL"]
+        DATABASE_URL = os.environ["DATABASE_URL"]
 
-        if DATABASE_URL_C.startswith("postgres://"):
-            DATABASE_URL_C = DATABASE_URL_C.replace("postgres://", "postgresql://", 1)
+        if DATABASE_URL.startswith("postgres://"):
+            DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
 
-        if not DATABASE_URL_C:
+        if not DATABASE_URL:
             raise ValueError("No DATABASE_URL environment variable set")
 
         # Create an SQLAlchemy engine
-        engine = create_engine(DATABASE_URL_C)
+        engine = create_engine(DATABASE_URL)
 
         # Create a LangChain SQLDatabase instance using the SQLAlchemy engine
         db = SQLDatabase(engine)

@@ -7,6 +7,9 @@ def irish_data_chatbot():
     # This will create a text area for user input and store it in 'query'
     query = st.text_area(
         "Please ask your question 👇🏻",
+        "⚠️❗ Please try to use terms like average/mean/sum in your queries. For example: 'Irish demand (IE), average by year, from 2018 to 2023.' ❗",
+        "Also, be specific. For instance, 'IE' refers to the Republic of Ireland and 'NI' stands for Northern Ireland.",
+        "Please note, this is not a product but a hobby tool to showcase the power of large language models in making our lives easier.",
         placeholder="Example: What is the average wind generation in Ireland in 2023, averaged by month?",
     ).strip()  # .strip() removes any leading/trailing whitespace
 
